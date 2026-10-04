@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CloudNotes — Notes Sharing Hub</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="auth" class="auth">
+  <div class="auth-card">
+    <div class="logo">☁️ <span>CloudNotes</span></div>
+    <p class="muted">Your simple cloud-based notes sharing hub.</p>
+    <div class="tabs"><button class="tab active" data-mode="login">Login</button><button class="tab" data-mode="register">Register</button></div>
+    <form id="authForm">
+      <input id="name" placeholder="Full name" class="register-only">
+      <input id="email" type="email" placeholder="Email address" required>
+      <input id="password" type="password" placeholder="Password" required>
+      <button class="primary" type="submit" id="authBtn">Login</button>
+    </form>
+    <p id="authMsg" class="msg"></p>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <aside>
+    <div class="logo">☁️ <span>CloudNotes</span></div>
+    <nav>
+      <button class="nav active" data-page="dashboard">⌂ Dashboard</button>
+      <button class="nav" data-page="notes">📚 All Notes</button>
+      <button class="nav" data-page="upload">⬆ Upload Notes</button>
+      <button class="nav" data-page="favorites">★ Favorites</button>
+      <button class="nav" data-page="my">👤 My Notes</button>
+    </nav>
+    <button id="logout" class="logout">Log out</button>
+  </aside>
+
+  <main>
+    <header>
+      <div><h1 id="pageTitle">Dashboard</h1><p class="muted">Find, share and manage your study notes.</p></div>
+      <button class="primary" onclick="showPage('upload')">+ Upload Notes</button>
+    </header>
+
+    <section id="dashboard" class="page">
+      <div class="stats">
+        <div class="stat"><span>📚</span><b id="totalNotes">0</b><small>Total Notes</small></div>
+        <div class="stat"><span>⬇️</span><b id="totalDownloads">0</b><small>Downloads</small></div>
+        <div class="stat"><span>★</span><b id="totalFavorites">0</b><small>Favorites</small></div>
+        <div class="stat"><span>📂</span><b id="myNotes">0</b><small>My Notes</small></div>
+      </div>
+      <div class="card"><div class="card-head"><h2>Recent Notes</h2><button class="textbtn" onclick="showPage('notes')">View all</button></div><div id="recent" class="grid"></div></div>
+    </section>
+
+    <section id="notes" class="page hidden">
+      <div class="toolbar"><input id="search" placeholder="🔎 Search notes by title or subject..."><select id="category"><option value="">All categories</option><option>Mathematics</option><option>Computer Science</option><option>Engineering</option><option>Science</option><option>Management</option><option>Other</option></select></div>
+      <div id="notesGrid" class="grid"></div>
+    </section>
+
+    <section id="upload" class="page hidden">
+      <div class="card form-card"><h2>Upload Study Notes</h2><p class="muted">Share useful notes with your classmates.</p>
+        <form id="noteForm" enctype="multipart/form-data">
+          <div class="two"><input name="title" placeholder="Note title" required><input name="subject" placeholder="Subject" required></div>
+          <div class="two"><select name="category"><option>Mathematics</option><option>Computer Science</option><option>Engineering</option><option>Science</option><option>Management</option><option>Other</option></select><input name="description" placeholder="Short description"></div>
+          <label class="drop"><input type="file" name="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt"><span>📄 Choose a notes file (max 10 MB)</span></label>
+          <button class="primary" type="submit">Upload Note</button><p id="uploadMsg" class="msg"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="favorites" class="page hidden"><div class="card-head"><h2>Your Favorite Notes</h2></div><div id="favGrid" class="grid"></div></section>
+    <section id="my" class="page hidden"><div class="card-head"><h2>Notes Uploaded by You</h2></div><div id="myGrid" class="grid"></div></section>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
